@@ -16,6 +16,11 @@ export default tseslint.config(
       '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
     },
   },
+  {
+    // Tests index into fixtures they have just built.
+    files: ['tests/**'],
+    rules: { '@typescript-eslint/no-non-null-assertion': 'off' },
+  },
   { files: ['**/*.js'], ...tseslint.configs.disableTypeChecked },
   prettier,
 );
