@@ -1,0 +1,10 @@
+dist/
+coverage/
+playwright-report/
+test-results/
+package-lock.json
+uv.lock
+# Vendored upstream code and generated fixtures are kept byte-for-byte.
+src/algorithms/linedraw/upstream/
+tests/reference/
+tests/fixtures/
