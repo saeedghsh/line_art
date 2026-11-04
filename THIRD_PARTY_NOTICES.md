@@ -6,6 +6,41 @@ own licenses and copyright notices. Their authors are credited here and in the
 application; they are not affiliated with this project and do not endorse or
 maintain it.
 
+## linedraw
+
+- Source: <https://github.com/LingDong-/linedraw>
+- Commit: `3aedc2f61d0ef3a3eb2e1ba18b933cbcd95a44ad`
+- Author: Lingdong Huang
+- License: MIT (full text below; also in
+  [`src/algorithms/linedraw/upstream/LICENSE`](src/algorithms/linedraw/upstream/LICENSE))
+- Used in: [`src/algorithms/linedraw/upstream/`](src/algorithms/linedraw/upstream/)
+  contains `linedraw.py`, `filters.py`, `strokesort.py`, `perlin.py` and
+  `util.py`, unmodified.
+
+```text
+MIT License
+
+Copyright (c) 2017 Lingdong Huang
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 ## SquiggleCam
 
 - Source: <https://github.com/msurguy/SquiggleCam>
