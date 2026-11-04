@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Turn images into plotter-friendly SVG line art with linedraw and SquiggleCam, entirely in your browser."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>Line Art Playground</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="./favicon.svg" alt="" width="28" height="28" />
+        <div>
+          <h1>Line Art Playground</h1>
+          <p class="tagline">Turn images into plotter-friendly SVG line drawings.</p>
+        </div>
+      </div>
+      <nav class="topnav">
+        <a href="#about">About &amp; credits</a>
+        <a href="https://github.com/saeedghsh/line-art-playground">Source</a>
+      </nav>
+    </header>
+
+    <p class="privacy">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+        <path
+          fill="currentColor"
+          d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4Zm0 6a3 3 0 0 1 3 3v1h1v6H8v-6h1v-1a3 3 0 0 1 3-3Zm0 2a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z"
+        />
+      </svg>
+      Everything runs locally in your browser. Your images are never uploaded.
+    </p>
+
+    <main class="layout">
+      <aside class="panel" aria-label="Controls">
+        <section class="step" aria-labelledby="image-heading">
+          <h2 id="image-heading"><span class="step-number">1</span> Image</h2>
+          <label class="dropzone" id="dropzone">
+            <input type="file" id="file-input" accept="image/*" class="visually-hidden" />
+            <span class="dropzone-text"
+              >Drop an image here or <span class="link">choose a file</span></span
+            >
+            <span class="dropzone-hint">PNG, JPEG, WebP, …</span>
+          </label>
+          <p class="image-meta">
+            <span id="image-info">No image selected.</span>
+            <button type="button" id="sample-button" class="link-button">Use a sample image</button>
+          </p>
+        </section>
+
+        <section class="step" aria-labelledby="algorithm-heading">
+          <h2 id="algorithm-heading"><span class="step-number">2</span> Algorithm</h2>
+          <select id="algorithm-select" aria-labelledby="algorithm-heading"></select>
+          <p id="algorithm-description" class="algorithm-description"></p>
+          <p id="algorithm-credit" class="algorithm-credit"></p>
+          <p id="runtime-note" class="runtime-note" hidden></p>
+        </section>
+
+        <section class="step" aria-labelledby="parameters-heading">
+          <div class="step-header">
+            <h2 id="parameters-heading"><span class="step-number">3</span> Parameters</h2>
+            <button type="button" id="reset-button" class="link-button">Reset to defaults</button>
+          </div>
+          <form
+            id="parameter-form"
+            class="parameter-form"
+            aria-labelledby="parameters-heading"
+          ></form>
+        </section>
+
+        <div class="panel-actions">
+          <button type="button" id="generate-button" class="primary" disabled>Generate</button>
+        </div>
+      </aside>
+
+      <section class="workspace" aria-label="Preview">
+        <div class="previews">
+          <figure class="preview">
+            <figcaption>Original</figcaption>
+            <div class="frame" id="original-frame">
+              <img id="original-image" alt="The selected image" hidden />
+              <p class="placeholder" id="original-placeholder">Choose an image to begin.</p>
+            </div>
+          </figure>
+          <figure class="preview" id="result-figure">
+            <figcaption>
+              Drawing
+              <span id="result-stats" class="stats"></span>
+            </figcaption>
+            <div class="frame drawing-frame" id="result-frame">
+              <img id="result-image" alt="Generated line drawing" hidden />
+              <p class="placeholder" id="result-placeholder">Your drawing will appear here.</p>
+            </div>
+          </figure>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+
+        <div class="result-actions">
+          <button type="button" id="download-svg" disabled>Download SVG</button>
+          <button type="button" id="download-png" disabled>Download PNG</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="about" id="about">
+      <h2>About &amp; credits</h2>
+      <p>
+        Line Art Playground runs open-source image-to-line-art algorithms side by side, so you can
+        compare them and export plotter-ready SVG files. All processing happens on your device:
+        JavaScript algorithms run directly, and Python algorithms run in
+        <a href="https://pyodide.org">Pyodide</a>, which the browser downloads from the jsDelivr CDN
+        on first use. Your images are never sent anywhere.
+      </p>
+      <div id="credits" class="credits"></div>
+      <p>
+        The algorithms are the work of their original authors, credited above, and are used under
+        their licenses. This project is independent: the original authors are not affiliated with it
+        and do not endorse it. See
+        <a href="https://github.com/saeedghsh/line-art-playground/blob/main/THIRD_PARTY_NOTICES.md"
+          >third-party notices</a
+        >
+        for details and the changes made to each algorithm. The playground itself is
+        <a href="https://github.com/saeedghsh/line-art-playground">MIT-licensed</a>.
+      </p>
+    </footer>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
