@@ -1,0 +1,37 @@
+# Python tooling for the bundled linedraw code. The browser runs it in
+# Pyodide; these dependencies reproduce that environment natively for tests.
+[project]
+name = "line-art-playground"
+version = "0.1.0"
+requires-python = ">=3.14,<3.15"
+
+[dependency-groups]
+dev = [
+  # Pinned to the versions in the Pyodide release used by the app
+  # (node_modules/pyodide/pyodide-lock.json); tests compare exact output.
+  "pillow==12.2.0",
+  "numpy==2.4.6",
+  "opencv-python-headless==4.11.0.86",
+  "pytest==9.2.0",
+  "ruff==0.17.3",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+addopts = ["--import-mode=importlib"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+# Vendored upstream code is kept byte-for-byte.
+extend-exclude = ["src/algorithms/linedraw/upstream"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "ANN", "PTH", "RUF"]
+
+[tool.ruff.lint.isort]
+# Top-level modules from src/algorithms/linedraw (and its upstream/) and tests/python.
+known-first-party = ["linedraw", "linedraw_reference", "linedraw_web", "perlin"]

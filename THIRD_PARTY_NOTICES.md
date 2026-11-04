@@ -15,7 +15,33 @@ maintain it.
   [`src/algorithms/linedraw/upstream/LICENSE`](src/algorithms/linedraw/upstream/LICENSE))
 - Used in: [`src/algorithms/linedraw/upstream/`](src/algorithms/linedraw/upstream/)
   contains `linedraw.py`, `filters.py`, `strokesort.py`, `perlin.py` and
-  `util.py`, unmodified.
+  `util.py`, unmodified. They run in the browser with Pyodide.
+
+Modifications: none to the upstream files. The integration code in
+[`src/algorithms/linedraw/linedraw_web.py`](src/algorithms/linedraw/linedraw_web.py),
+which is this project's own, differs from running `linedraw.py` as follows:
+
+1. Input and output: instead of reading an image file and writing
+   `output/out.svg`, it takes pixels decoded by the browser and returns the SVG.
+   The steps of upstream `sketch()` are reproduced with explicit settings
+   instead of module globals; the bitmap preview (`-b`) is not available.
+2. SVG size: upstream `makesvg()` output has no `width`, `height` or `viewBox`,
+   which browsers need. These attributes are added to the root element, sized
+   to the image area plus any strokes the hand-drawn jitter moves beyond it.
+   The polylines are unchanged.
+3. Seeding: the Perlin noise table is seeded from a user-visible seed, where
+   upstream draws a new random seed per process, so results are reproducible.
+4. Empty results: a blank image, or both contours and hatching disabled,
+   yields an empty drawing where upstream `sortlines()` raises `IndexError`.
+5. Options: the processing resolution, a module constant of 1024 upstream, can
+   be lowered to 256. Hatch sizes below 8 and contour simplification above 4
+   are not offered, and processing heights above 4096 pixels are rejected,
+   because run time grows quadratically.
+
+[`tests/python/test_linedraw_web.py`](tests/python/test_linedraw_web.py) and
+[`tests/unit/linedraw.test.ts`](tests/unit/linedraw.test.ts) check that the
+SVGs produced natively with CPython and in Pyodide match those written by
+unmodified upstream `linedraw.py` exactly, polyline for polyline.
 
 ```text
 MIT License
@@ -120,3 +146,8 @@ in `package.json`, only when a Python-based algorithm is used.
 - [Pyodide](https://pyodide.org) 314.0.7, the CPython interpreter compiled to
   WebAssembly, with its standard library: Mozilla Public License 2.0; CPython
   is under the Python Software Foundation License.
+- [Pillow](https://python-pillow.org) 12.2.0: MIT-CMU License.
+- [NumPy](https://numpy.org) 2.4.6: BSD 3-Clause License; only with OpenCV
+  edge detection.
+- [OpenCV](https://opencv.org) 4.11.0 (`opencv-python`): Apache License 2.0;
+  only with OpenCV edge detection.

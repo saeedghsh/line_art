@@ -16,7 +16,10 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:python": "uv run pytest",
+    "lint:python": "uv run ruff check && uv run ruff format --check",
+    "fixtures:linedraw": "uv run python tests/python/linedraw_reference.py"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

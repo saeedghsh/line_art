@@ -1,0 +1,9 @@
+[
+  { "name": "defaults", "params": {} },
+  {
+    "name": "sobel-fine-hatch",
+    "params": { "edgeDetection": "sobel", "resolution": 512, "hatchSize": 8, "contourSimplify": 1, "seed": 7 }
+  },
+  { "name": "contours-only", "params": { "drawHatch": false, "contourSimplify": 3, "seed": 3 } },
+  { "name": "hatch-only", "params": { "drawContours": false, "hatchSize": 32, "resolution": 768 } }
+]

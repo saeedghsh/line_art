@@ -7,5 +7,7 @@ Lingdong Huang, MIT License (see [LICENSE](LICENSE)), taken from commit
 Only the algorithm modules and the license are included; the sample images,
 screenshots and example output are not.
 
-Do not edit these files; code that adapts them to the browser lives outside
-this directory.
+Do not edit these files. The browser integration lives in
+[`../linedraw_web.py`](../linedraw_web.py), and
+`tests/python/test_linedraw_web.py` checks that the files here are
+byte-identical to upstream.
