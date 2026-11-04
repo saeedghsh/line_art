@@ -110,3 +110,13 @@ SOFTWARE.
 SquiggleCam implements the SquiggleDraw algorithm by Gregg Wygonik
 (<https://github.com/gwygonik/SquiggleDraw>), which is released into the public
 domain under the Unlicense. No SquiggleDraw code is included in this project.
+
+## Runtime dependencies loaded from a CDN
+
+The following are not part of this repository or its build output. The browser
+downloads them from <https://cdn.jsdelivr.net/pyodide/> at the version pinned
+in `package.json`, only when a Python-based algorithm is used.
+
+- [Pyodide](https://pyodide.org) 314.0.7, the CPython interpreter compiled to
+  WebAssembly, with its standard library: Mozilla Public License 2.0; CPython
+  is under the Python Software Foundation License.
