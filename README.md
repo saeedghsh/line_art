@@ -125,15 +125,16 @@ To add an algorithm, see [docs/adding-an-algorithm.md](docs/adding-an-algorithm.
 ## Deploying to GitHub Pages
 
 The workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs all
-checks on pushes and pull requests, and on pushes to `main` deploys `dist/` to
+checks on pushes and pull requests, and on pushes to `master` deploys `dist/` to
 GitHub Pages. The build uses relative URLs, so it works under any repository
 name. To publish:
 
 1. Create an empty GitHub repository, e.g. `line-art-playground`, and push this
-   repository's `main` branch to it.
+   repository's `master` branch to it.
 2. In the repository settings under **Pages**, set **Source** to
    **GitHub Actions**.
-3. Re-run the workflow, or push to `main`. The site is then served at
+3. Push to `master`, or run the workflow manually from the **Actions** tab
+   (**Run workflow** on `master`). The site is then served at
    `https://<user>.github.io/<repository>/`.
 
 The page links to the source repository at
