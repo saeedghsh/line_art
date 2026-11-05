@@ -195,7 +195,12 @@ export function createLinedraw(python: PythonRunner): Algorithm {
             details: error.traceback,
           });
         }
-        throw error;
+        if (signal.aborted) throw error;
+        // Typically the runtime could not be downloaded, e.g. when offline.
+        throw new AlgorithmError(
+          'The Python runtime could not be started. Check your internet connection and try again.',
+          { cause: error, details: error instanceof Error ? error.message : String(error) },
+        );
       }
       return toResult(result);
     },

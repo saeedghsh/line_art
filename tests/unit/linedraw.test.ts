@@ -159,6 +159,38 @@ describe('linedraw adapter', () => {
     });
   });
 
+  it('explains runtime start-up failures, such as being offline', async () => {
+    const { algorithm } = stubRunner(() =>
+      Promise.reject(new Error('Failed to fetch dynamically imported module')),
+    );
+    const error: unknown = await runAlgorithm(algorithm, image, {}, context()).catch(
+      (e: unknown) => e,
+    );
+    expect(error).toBeInstanceOf(AlgorithmError);
+    expect((error as AlgorithmError).message).toMatch(/could not be started/);
+    expect((error as AlgorithmError).details).toBe('Failed to fetch dynamically imported module');
+  });
+
+  it('lets cancellation through unchanged', async () => {
+    const controller = new AbortController();
+    const { algorithm } = stubRunner(() => {
+      const reason = new DOMException('Cancelled', 'AbortError');
+      controller.abort(reason);
+      return Promise.reject(reason);
+    });
+    const error: unknown = await runAlgorithm(
+      algorithm,
+      image,
+      {},
+      {
+        onProgress: () => undefined,
+        signal: controller.signal,
+      },
+    ).catch((e: unknown) => e);
+    expect(error).toBeInstanceOf(DOMException);
+    expect((error as DOMException).name).toBe('AbortError');
+  });
+
   it.each([
     ['too wide', solidImage(2000, 1, 0), /too wide/],
     ['too tall', solidImage(10, 100, 0), /too tall/],
